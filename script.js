@@ -49,6 +49,7 @@ function render(){
         
     }
     resizeApps();
+    document.requestFullscreen();
 }
 
 let mouse = false;
