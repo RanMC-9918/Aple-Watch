@@ -2,12 +2,13 @@ const container = document.getElementsByClassName("apps-container");
 const inp = document.getElementById("overlay");
 const but = document.getElementById("overlay2");
 
-let imageLinks = ["https://www.youtube.com/@BB23-", "https://www.instagram.com/ranmc9918/", "https://www.facebook.com/profile.php?id=100083059085989", "https://www.youtube.com/channel/UCEC9bd4ZELRY8-fgElrRo_A", "https://open.spotify.com/user/31biblaehr72x7fyqcb3bwuatvou", "https://web.snapchat.com/", "https://web.whatsapp.com/", "https://www.netflix.com/", "https://www.messenger.com/"]
+let imageLinks = ["https://www.youtube.com/@BB23-", "https://www.instagram.com/ranmc9918/", "https://www.tiktok.com/@ranmc9918", "https://www.facebook.com/profile.php?id=100083059085989", "https://www.youtube.com/channel/UCEC9bd4ZELRY8-fgElrRo_A", "https://open.spotify.com/user/31biblaehr72x7fyqcb3bwuatvou", "https://web.snapchat.com/", "https://web.whatsapp.com/", "https://www.netflix.com/", "https://www.messenger.com/"]
 
 let num;
 let lines = inp.value;
 
 but.addEventListener("click", render)
+
 render();
 function render(){
     lines = inp.value;
@@ -47,6 +48,7 @@ function render(){
         }
         
     }
+    resizeApps();
 }
 
 let mouse = false;
@@ -86,11 +88,11 @@ function move(event) {
         boxT = realY - y + boxT;
         x = realX
         y = realY
-        if(boxL > 0.1 * window.innerWidth ){
-            boxL = 0.1 * window.innerWidth
+        if(boxL > 0.2 * window.innerWidth ){
+            boxL = 0.2 * window.innerWidth
         }
-        else if(boxL < -0.1 * window.innerWidth){
-            boxL = -0.1 * window.innerWidth;
+        else if(boxL < -0.2 * window.innerWidth){
+            boxL = -0.2 * window.innerWidth;
         }
 
         resizeApps();
@@ -98,7 +100,7 @@ function move(event) {
     }
 
 }
-
+let al = true
 function isMobile() {
     if (navigator.userAgent.match(/Android/i)
         || navigator.userAgent.match(/webOS/i)
@@ -108,6 +110,10 @@ function isMobile() {
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i)
     ) {
+        if(al){
+            alert("Get on your computer, it will look like crap on your phone.")
+            al = false
+        }
         return true;
     }
     else {
@@ -132,6 +138,8 @@ function moveBackX() {
     }
 }
 
+
+
 function resizeApps(){
     appElements = document.getElementsByClassName("apps")
         for(let i = 0; i < appElements.length; i++)
@@ -141,15 +149,14 @@ function resizeApps(){
             let full = Math.sqrt(Math.pow(window.innerHeight, 2) + Math.pow(window.innerWidth, 2))
             let xer = 2 * dist/full;
             let factor = -60 * Math.pow(xer, 4) + 1.8 * Math.pow(xer, 3) + 2.8 * Math.pow(xer, 2) + -0.1 * xer + 0.9
-            if(factor > 0){
+            //let factor = -30 * Math.pow(dist / full, 2) + 1
+            if(factor > 0.3){
                 appElements[i].style.transform = "scale(" + factor + ")";
             }
             else{
-                appElements[i].style.transform = "scale(0px)";
+                appElements[i].style.transform = "scale(0.3)";
             }
             
         
         }
 }
-
-resizeApps();
